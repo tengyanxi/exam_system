@@ -30,16 +30,30 @@ def find_question(bank_path, type_, chapters):
 
 def get_data(bank_name, type_, chapters):
     if type_ == "判断":
-        data = judgement_questions(bank_name, type_, chapters)
-    return data
+        data_dic = judgement_questions(bank_name, type_, chapters)
+    return data_dic
 
 def judgement_questions(bank_name, type_, chapters):
     bank_path = find_bank(bank_name)
-    question_path = find_question(bank_path, type_, chapters)
-    return question_path
+    questions_path = find_question(bank_path, type_, chapters)
+    data_dic = get_judgement_data(questions_path)
+    return data_dic
 
+def get_judgement_data(questions_path):
+    data_list = []
+    for question_path in questions_path:
+        data_list = read_judge_bank(data_list, question_path)
+    return data_list
+
+
+def read_judge_bank(data_list, question_path):
+    workbook = xlrd.open_workbook(question_path)
+    sheet = workbook.sheets()[0]
+    nrows = sheet.nrows
+    for i in range(nrows):
+        data_list.append(sheet.row_values(i))
+    return data_list
 
 if __name__ == "__main__":
-    data = get_data( "马克思", "判断", ["第一章"])
+    data = get_data("马克思", "判断", ["绪论"])
     print(data)
-    print(1)
