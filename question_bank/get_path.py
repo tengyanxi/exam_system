@@ -2,14 +2,10 @@ import os
 
 def find_bank(bank_name):
     path = os.getcwd()
-    print(path)
     dir_list = os.listdir(path)
-    print(dir_list)
-    print(bank_name)
     for bank_dir in dir_list:
         if bank_dir.find(bank_name) != -1:  # -1代表文件夹名称中没有bank_name
             bank_path = path + "/" + bank_dir
-            print(bank_path)
             return bank_path
 
 def find_question(bank_path, type_, chapters):

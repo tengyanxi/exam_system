@@ -1,11 +1,10 @@
-from judge import judgement_questions
+from read_data import read_data
 
 def get_data(bank_name, type_, chapters):
-    if type_ == "判断":
-        data_dic = judgement_questions(bank_name, type_, chapters)
-    return data_dic
+    data_list = read_data(bank_name, type_, chapters)
+    return data_list
 
 
 if __name__ == "__main__":
-    data = get_data("马克思", "判断", ["绪论"])
-    print(data)
+    data_list = get_data("马克思", "多选", ["绪论"])
+    print(data_list)
