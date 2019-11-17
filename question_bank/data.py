@@ -42,3 +42,4 @@ def judgement_questions(bank_name, type_, chapters):
 if __name__ == "__main__":
     data = get_data( "马克思", "判断", ["第一章"])
     print(data)
+    print(1)
