@@ -6,5 +6,5 @@ def get_data(bank_name, type_, chapters):
 
 
 if __name__ == "__main__":
-    data_list = get_data("马克思", "多选", ["绪论"])
+    data_list = get_data("马克思", "单选", ["第四章"])
     print(data_list)
