@@ -14,5 +14,11 @@ def read_bank(data_list, question_path):
     sheet = workbook.sheets()[0]
     nrows = sheet.nrows
     for i in range(nrows):
-        data_list.append(sheet.row_values(i))
+        values = sheet.row_values(i)
+        values_wash = []
+        for value in values:
+            move = dict.fromkeys((ord(c) for c in u"\xa0\n\t"))
+            value_wash = str(value).translate(move)
+            values_wash.append(value_wash)
+        data_list.append(values_wash)
     return data_list
