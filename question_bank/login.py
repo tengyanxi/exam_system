@@ -2,8 +2,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from loginWindow import Ui_loginWindow
 from register import register
-
-name_pwd = {"PeiLei":"123456", "DingYuLong":"123456"}
+from DataOperation import judgeIn, judgeMatch
 
 class login(Ui_loginWindow,QMainWindow):
 
@@ -20,15 +19,15 @@ class login(Ui_loginWindow,QMainWindow):
         self.lineEdit_name.textChanged.connect(self.showTip)
 
     def showTip(self):    #登陆界面用户名不存在提示，后续需修改：tip_label失去焦点时才触发判断用户名存在的事件
-        if self.lineEdit_name.text() not in name_pwd:
+        if not judgeIn(self.lineEdit_name.text()):
             self.tip_label.setText("用户名不存在！")
         else:
             self.tip_label.setText("")
 
     def loginButton_click(self):
-        self._name = self.lineEdit_name.text()
-        self._pwd = self.lineEdit_pwd.text()
-        if self._name in name_pwd and self._pwd == name_pwd[self._name]:
+        #self._name = self.lineEdit_name.text()
+        #self._pwd = self.lineEdit_pwd.text()
+        if judgeIn(self.lineEdit_name.text()) and judgeMatch(self.lineEdit_name.text(), self.lineEdit_pwd.text()):
             reply = QMessageBox.information(self, "登录成功", "登录成功", QMessageBox.Yes)
             if reply == QMessageBox.Yes:
                 #newWindow.show()  登陆成功后跳转新界面
@@ -43,6 +42,7 @@ class login(Ui_loginWindow,QMainWindow):
         self.lineEdit_name.setText("")
         self.lineEdit_pwd.setText("")
         self.tip_label.setText("")
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
