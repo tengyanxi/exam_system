@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'login1.ui'
+# Form implementation generated from reading ui file 'loginWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.0
 #
@@ -58,6 +58,7 @@ class Ui_loginWindow(object):
         font.setFamily("宋体")
         font.setPointSize(14)
         self.lineEdit_pwd.setFont(font)
+        self.lineEdit_pwd.setEchoMode(QtWidgets.QLineEdit.Password)
         self.lineEdit_pwd.setObjectName("lineEdit_pwd")
         self.tip_label = QtWidgets.QLabel(self.centralwidget)
         self.tip_label.setGeometry(QtCore.QRect(500, 120, 101, 31))

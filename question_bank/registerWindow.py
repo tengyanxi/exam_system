@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'register.ui'
+# Form implementation generated from reading ui file 'registerWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.0
 #
@@ -50,6 +50,7 @@ class Ui_registerWindow(object):
         font.setFamily("宋体")
         font.setPointSize(14)
         self.lineEdit_register_pwd1.setFont(font)
+        self.lineEdit_register_pwd1.setEchoMode(QtWidgets.QLineEdit.Password)
         self.lineEdit_register_pwd1.setObjectName("lineEdit_register_pwd1")
         self.lineEdit_register_pwd2 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit_register_pwd2.setGeometry(QtCore.QRect(270, 220, 261, 41))
@@ -57,6 +58,7 @@ class Ui_registerWindow(object):
         font.setFamily("宋体")
         font.setPointSize(14)
         self.lineEdit_register_pwd2.setFont(font)
+        self.lineEdit_register_pwd2.setEchoMode(QtWidgets.QLineEdit.Password)
         self.lineEdit_register_pwd2.setObjectName("lineEdit_register_pwd2")
         self.confirmButton = QtWidgets.QPushButton(self.centralwidget)
         self.confirmButton.setGeometry(QtCore.QRect(130, 280, 131, 51))
@@ -91,6 +93,9 @@ class Ui_registerWindow(object):
         self.tip_label3.setText("")
         self.tip_label3.setWordWrap(True)
         self.tip_label3.setObjectName("tip_label3")
+        self.tip_label4 = QtWidgets.QLabel(self.centralwidget)
+        self.tip_label4.setGeometry(QtCore.QRect(240, 190, 391, 20))
+        self.tip_label4.setObjectName("tip_label4")
         registerWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(registerWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 649, 26))
@@ -111,3 +116,4 @@ class Ui_registerWindow(object):
         self.label_register_pwd2.setText(_translate("registerWindow", "确认密码："))
         self.confirmButton.setText(_translate("registerWindow", "确定"))
         self.returnButton.setText(_translate("registerWindow", "返回"))
+        self.tip_label4.setText(_translate("registerWindow", "密码只能含有数字和字母，并且只能以字母开头"))

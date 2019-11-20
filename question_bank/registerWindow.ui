@@ -102,6 +102,9 @@
       <pointsize>14</pointsize>
      </font>
     </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_register_pwd2">
     <property name="geometry">
@@ -117,6 +120,9 @@
       <family>宋体</family>
       <pointsize>14</pointsize>
      </font>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
     </property>
    </widget>
    <widget class="QPushButton" name="confirmButton">
@@ -206,6 +212,19 @@
     </property>
     <property name="wordWrap">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="tip_label4">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>190</y>
+      <width>391</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>密码只能含有数字和字母，并且只能以字母开头</string>
     </property>
    </widget>
   </widget>
