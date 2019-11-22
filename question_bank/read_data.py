@@ -6,10 +6,11 @@ def read_data(bank_name, type_, chapters):
     questions_path = find_question(bank_path, type_, chapters)
     data_list = []
     for question_path in questions_path:
-        data_list = read_bank(data_list, question_path)
+        data_list = read_bank(question_path)
     return data_list
 
-def read_bank(data_list, question_path):
+def read_bank(question_path):
+    data_list = []
     workbook = xlrd.open_workbook(question_path)
     sheet = workbook.sheets()[0]
     nrows = sheet.nrows
