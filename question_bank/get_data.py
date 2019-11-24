@@ -10,7 +10,7 @@ def get_data(index):
         data_list = []
         num = len(index)
         for key, _ in file_data.items():
-            if key[:num].find(index):
+            if key[:num].find(index) != -1:
                 data = file_data[key]
                 data_list.append(data)
         return data_list
@@ -18,3 +18,4 @@ def get_data(index):
 
 if __name__ == "__main__":
     print(get_data('0201')[-1])
+    print(get_data('0101')[-1])
