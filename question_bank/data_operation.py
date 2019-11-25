@@ -1,6 +1,7 @@
 import json
 
-def judgeIn(name):
+
+def judge_in(name):
     with open("name_pwd.json", "r") as f:
         nameData = json.load(f)
     if name in nameData:
@@ -8,7 +9,7 @@ def judgeIn(name):
     else:
         return False
 
-def judgeMatch(name, pwd):
+def judge_match(name, pwd):
     with open("name_pwd.json", "r") as f:
         nameData = json.load(f)
     if nameData[name] == pwd:
@@ -16,7 +17,7 @@ def judgeMatch(name, pwd):
     else:
         return False
 
-def writeData(name, pwd):
+def write_data(name, pwd):
     nameData = {}
     with open("name_pwd.json", "r") as f1:
         nameData = json.load(f1)

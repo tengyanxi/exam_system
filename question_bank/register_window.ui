@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>registerWindow</class>
- <widget class="QMainWindow" name="registerWindow">
+ <class>register_window</class>
+ <widget class="QMainWindow" name="register_window">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -14,7 +14,7 @@
    <string>注册</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label_register_name">
+   <widget class="QLabel" name="labelRegisterName">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -33,7 +33,7 @@
      <string>用户名：</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_register_pwd">
+   <widget class="QLabel" name="labelRegisterPwd1">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -52,7 +52,7 @@
      <string>密码：</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_register_pwd2">
+   <widget class="QLabel" name="labelRegisterPwd2">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -71,7 +71,7 @@
      <string>确认密码：</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_register_name">
+   <widget class="QLineEdit" name="lineEditRegisterName">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -87,7 +87,7 @@
      </font>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_register_pwd1">
+   <widget class="QLineEdit" name="lineEditRegisterPwd1">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -106,7 +106,7 @@
      <enum>QLineEdit::Password</enum>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_register_pwd2">
+   <widget class="QLineEdit" name="lineEditRegisterPwd2">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -163,7 +163,7 @@
      <string>返回</string>
     </property>
    </widget>
-   <widget class="QLabel" name="tip_label2">
+   <widget class="QLabel" name="tipLabel2">
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -187,7 +187,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="tip_label3">
+   <widget class="QLabel" name="tipLabel3">
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -214,7 +214,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="tip_label4">
+   <widget class="QLabel" name="tipLabel4">
     <property name="geometry">
      <rect>
       <x>240</x>
