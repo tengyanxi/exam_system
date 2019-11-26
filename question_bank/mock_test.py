@@ -1,4 +1,6 @@
 import sys
+
+from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from mock_test_window import Ui_MockTestWindow
 from question_types import SingleChoice, MultipleChoice, JudgmentQuestion
@@ -18,6 +20,8 @@ class MockTest(Ui_MockTestWindow, QMainWindow):
         self._multipleChoice = MultipleChoice(lessons["马原"] + questionType["多选"], 10)
         self._judgmentQuestion = JudgmentQuestion(lessons["马原"] + questionType["判断"], 10)
         self.initUi()
+        self.init_time()
+        self.init_choose()
         self.init_your_answers()
 
     def initUi(self):
@@ -35,10 +39,33 @@ class MockTest(Ui_MockTestWindow, QMainWindow):
         self.pushButton_2.clicked.connect(self.show2)
         self.pushButton_3.clicked.connect(self.send)
 
+    def init_time(self):  # 倒计时功能
+        self.timer = QTimer()
+        self.timer.setInterval(1000)
+        self.timer.start()
+        self._minute = 89
+        self._second = 60
+        self.timer.timeout.connect(self.time_change)
+
+    def init_choose(self):
+        for i in range(self._singleChoice.get_num() + self._multipleChoice.get_num() + self._judgmentQuestion.get_num()):
+            self.listWidget.addItem("第" + str(i + 1) + "题")
+        self.listWidget.itemDoubleClicked.connect(self.switch_question)
+
     def init_your_answers(self):  # 初始化做题者的答案的字典，初始值都设为空，这样做题者只要没答某道题，返回该题时自动恢复未选择状态
         for i in range(
                 self._singleChoice.get_num() + self._multipleChoice.get_num() + self._judgmentQuestion.get_num()):
             self._yourAnswers[i] = ''
+
+    def time_change(self):
+        self._second -= 1
+        if self._second == 0 and self._minute > 0:
+            self._minute -= 1
+            self._second = 59
+        self.label.setText('{:0>2d}:{:0>2d}'.format(self._minute, self._second))
+        if self._second == 0 and self._minute == 0:
+            self.timer.stop()
+
 
     def push_button_is_enabled(self):
         # 第一题不能按 上一题 的按钮
@@ -86,6 +113,22 @@ class MockTest(Ui_MockTestWindow, QMainWindow):
         self.checkBox_2.setHidden(False)
         self.checkBox_3.setHidden(False)
         self.checkBox_4.setHidden(False)
+        self.radioButton_5.setHidden(True)
+        self.radioButton_6.setHidden(True)
+
+    def object_change5(self):  # 单选转判断
+        self.radioButton.setHidden(True)
+        self.radioButton_2.setHidden(True)
+        self.radioButton_3.setHidden(True)
+        self.radioButton_4.setHidden(True)
+        self.radioButton_5.setHidden(False)
+        self.radioButton_6.setHidden(False)
+
+    def object_change6(self):  # 判断转单选
+        self.radioButton.setHidden(False)
+        self.radioButton_2.setHidden(False)
+        self.radioButton_3.setHidden(False)
+        self.radioButton_4.setHidden(False)
         self.radioButton_5.setHidden(True)
         self.radioButton_6.setHidden(True)
 
@@ -155,6 +198,50 @@ class MockTest(Ui_MockTestWindow, QMainWindow):
             self.radioButton_5.setChecked(True)
         elif answer == 'N':
             self.radioButton_6.setChecked(True)
+
+    def skip(self, item):
+        if item < self._singleChoice.get_num():  # 如果选中的是单选题
+            self.object_change2()
+            self.object_change6()
+            txt = self._singleChoice.show_problem(item)
+            self.textEdit.setText(txt)
+            self.return_answer1(item)
+            print(self._yourAnswers[item])
+        elif item < self._singleChoice.get_num() + self._multipleChoice.get_num():  # 如果选中的是多选题
+            self.object_change1()
+            self.object_change4()
+            front = self._singleChoice.get_num()
+            txt = self._multipleChoice.show_problem(item - front, front)
+            self.textEdit.setText(txt)
+            self.return_answer2(item)
+        else:  # 如果选中的是判断题
+            self.object_change3()
+            self.object_change5()
+            front = self._singleChoice.get_num() + self._multipleChoice.get_num()
+            txt = self._multipleChoice.show_problem(item - front, front)
+            self.textEdit.setText(txt)
+            self.return_answer3(item)
+
+    def switch_question(self):
+        indexes = self.listWidget.selectedIndexes()
+        for b in indexes:
+            item = int(b.row())
+            #print(item)
+        if self._currentQid < self._singleChoice.get_num():   # 当前停留在单选题
+            self.set_answer1()
+            self._singleChoice.add_answer(self._currentQid, self._yourAnswer)
+            self.skip(item)
+        elif self._currentQid < self._singleChoice.get_num() + self._multipleChoice.get_num():   # 当前停留在多选题
+            self.set_answer2()
+            self._multipleChoice.add_answer(self._currentQid - self._singleChoice.get_num(), self._yourAnswer)
+            self.skip(item)
+        else:  # 当前停留在判断题
+            self.set_answer3()
+            self._judgmentQuestion.add_answer(self._currentQid - self._singleChoice.get_num() - self._multipleChoice.get_num(), self._yourAnswer)
+            self.skip(item)
+        self._yourAnswers[self._currentQid] = self._yourAnswer
+        self._currentQid = item
+        self.push_button_is_enabled()
 
     def show1(self):  # 切换至上一题
         # 单选题切换到单选题的上一题
