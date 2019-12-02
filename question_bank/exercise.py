@@ -6,9 +6,9 @@ from question_types import SingleChoice, MultipleChoice, JudgmentQuestion
 
 lessons = {"马原": "0","近代史": "1", "思修": "2"}
 questionType = {"单选": "1", "多选": '2', "判断": '0'}
-n1 = 1000
-n2 = 1000
-n3 = 1000
+n1 = 20
+n2 = 10
+n3 = 20
 
 class Exercise(Ui_ExerciseWindow, QMainWindow):
     def __init__(self):
@@ -214,7 +214,7 @@ class Exercise(Ui_ExerciseWindow, QMainWindow):
             self.object_change3()
             self.object_change5()
             front = self.n1 + self.n2
-            txt = self._multipleChoice.show_problem(item - front, front)
+            txt = self._judgmentQuestion.show_problem(item - front, front)
             self.textEdit.setText(txt)
             self.return_answer3(item)
             self.stared_or_not(self._judgmentQuestion.if_stared(item - front))

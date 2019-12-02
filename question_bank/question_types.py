@@ -19,6 +19,7 @@ class Question:
         self._question_id_list = {}  # 将字典的键存入一个列表中，避免多次在extract_questions中查找
         self.init_answers()
         self.init_star()
+        print(self._answers)
 
     def init_answers(self):  # 初始化存放答案的字典及存放键的列表，值都设为空
         for i in range(self._num):

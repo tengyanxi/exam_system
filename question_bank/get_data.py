@@ -5,7 +5,7 @@ def get_data(index):
     输入数据的ID的任意前N位
     以list形式返回符合该ID的任意前N位的所有数据
     """
-    with open('data.json', 'r', encoding='utf-8') as f:
+    with open('exam_bank.json', 'r', encoding='utf-8') as f:
         file_data = json.load(f)
         data_list = []
         num = len(index)
@@ -18,4 +18,4 @@ def get_data(index):
 
 
 if __name__ == "__main__":
-    print(get_data('00030053')[0:6])
+    print(get_data('02')[0:6])

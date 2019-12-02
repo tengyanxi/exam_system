@@ -1,13 +1,18 @@
+import json
 import sys
+from encodings import gbk
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QMessageBox, QApplication
 from exercise import Exercise
 
+with open("exam_number.json", "r") as f2:
+    exam_number = json.load(f2)
+
 lessons = {"马原": "0","近代史": "1", "思修": "2"}
 questionType = {"单选": "1", "多选": '2', "判断": '0'}
-n1 = 10
-n2 = 10
-n3 = 10
+n1 = exam_number["Single"]
+n2 = exam_number["Multiple"]
+n3 = exam_number["Judge"]
 
 
 class MockTest(Exercise):
