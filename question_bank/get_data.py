@@ -18,4 +18,4 @@ def get_data(index):
 
 
 if __name__ == "__main__":
-    print(get_data('010100')[0:6])
+    print(get_data('00030053')[0:6])

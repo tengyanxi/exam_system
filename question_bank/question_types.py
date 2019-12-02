@@ -23,8 +23,8 @@ class Question:
     def init_answers(self):  # 初始化存放答案的字典及存放键的列表，值都设为空
         for i in range(self._num):
             self._question_id_list[i] = self._extract_questions[i][-1]
-            self._answers[i] = [self._extract_questions[i][-3], '']
-        # print(self.answers)
+            a = self._extract_questions[i][-3].replace(" ","")
+            self._answers[i] = [a, '']
         print(self._question_id_list)
 
     def init_star(self):
@@ -36,6 +36,7 @@ class Question:
 
     def add_answer(self, qid, your_answer):  # 将选择的答案先记录
         self._answers[qid][1] = your_answer
+        print(self._answers)
 
     def calculate_score(self):  # 点击交卷按钮时调用该函数
         try:
