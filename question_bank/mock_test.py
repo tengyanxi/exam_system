@@ -16,7 +16,7 @@ class MockTest(Exercise):
         self.init_time()
         self.pushButton_3.setText("交卷")
 
-    def init_num(self):   # 虚继承
+    def init_q_n(self):   # 虚继承
         self.q1 = lessons["马原"] + questionType["单选"]
         self.q2 = lessons["马原"] + questionType["多选"]
         self.q3 = lessons["马原"] + questionType["判断"]
