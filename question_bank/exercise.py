@@ -17,11 +17,11 @@ class Exercise(Ui_ExerciseWindow, QMainWindow):
         self._yourAnswer = ""  # 存放每次选择的答案
         self._yourAnswers = {}  # 记录选择的答案，用于回溯到做过的题目时恢复选项框状态
         self._currentQid = 0  # 记录当前题号，从0开始计数
-        self.init_num()
-        self._singleChoice = SingleChoice(lessons["马原"] + questionType["单选"], self.n1)
-        self._multipleChoice = MultipleChoice(lessons["马原"] + questionType["多选"], self.n2)
-        self._judgmentQuestion = JudgmentQuestion(lessons["马原"] + questionType["判断"], self.n3)
-        self.n1 = self._singleChoice.get_num()
+        self.init_q_n()
+        self._singleChoice = SingleChoice(self.q1, self.n1)
+        self._multipleChoice = MultipleChoice(self.q2, self.n2)
+        self._judgmentQuestion = JudgmentQuestion(self.q3, self.n3)
+        self.n1 = self._singleChoice.get_num()  # 防止题目数量超出导致n的改变
         self.n2 = self._multipleChoice.get_num()
         self.n3 = self._judgmentQuestion.get_num()
         self.initUi()
@@ -29,7 +29,10 @@ class Exercise(Ui_ExerciseWindow, QMainWindow):
         self.init_your_answers()
         self.setFixedSize(self.width(), self.height())  # 固定窗口大小
 
-    def init_num(self):
+    def init_q_n(self):
+        self.q1 = lessons["马原"] + questionType["单选"]
+        self.q2 = lessons["马原"] + questionType["多选"]
+        self.q3 = lessons["马原"] + questionType["判断"]
         self.n1 = n1
         self.n2 = n2
         self.n3 = n3

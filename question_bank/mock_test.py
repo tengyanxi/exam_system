@@ -2,9 +2,13 @@ import sys
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QMessageBox, QApplication
 from exercise import Exercise
+
+lessons = {"马原": "0","近代史": "1", "思修": "2"}
+questionType = {"单选": "1", "多选": '2', "判断": '0'}
 n1 = 10
 n2 = 10
 n3 = 10
+
 
 class MockTest(Exercise):
     def __init__(self):
@@ -12,7 +16,10 @@ class MockTest(Exercise):
         self.init_time()
         self.pushButton_3.setText("交卷")
 
-    def init_num(self):
+    def init_num(self):   # 虚继承
+        self.q1 = lessons["马原"] + questionType["单选"]
+        self.q2 = lessons["马原"] + questionType["多选"]
+        self.q3 = lessons["马原"] + questionType["判断"]
         self.n1 = n1
         self.n2 = n2
         self.n3 = n3
@@ -63,6 +70,7 @@ class MockTest(Exercise):
             reply2 = QMessageBox.information(self, '得分', '您的得分为：' + str(score) + '分')
             if reply2:
                 self.close()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
