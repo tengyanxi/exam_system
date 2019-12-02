@@ -2,13 +2,20 @@ import sys
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QMessageBox, QApplication
 from exercise import Exercise
-
+n1 = 10
+n2 = 10
+n3 = 10
 
 class MockTest(Exercise):
     def __init__(self):
         super().__init__()
         self.init_time()
         self.pushButton_3.setText("交卷")
+
+    def init_num(self):
+        self.n1 = n1
+        self.n2 = n2
+        self.n3 = n3
 
     def init_time(self):  # 倒计时功能
         self.timer = QTimer()

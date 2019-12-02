@@ -11,7 +11,6 @@ def get_data(index):
         num = len(index)
         for key, _ in file_data.items():
             if key[:num].find(index) != -1:
-            #if key[:num] == index:
                 data = file_data[key]
                 data.append(key)
                 data_list.append(data)

@@ -6,9 +6,9 @@ from question_types import SingleChoice, MultipleChoice, JudgmentQuestion
 
 lessons = {"马原": "0","近代史": "1", "思修": "2"}
 questionType = {"单选": "1", "多选": '2', "判断": '0'}
-n1 = 10
-n2 = 10
-n3 = 10
+n1 = 1000
+n2 = 1000
+n3 = 1000
 
 class Exercise(Ui_ExerciseWindow, QMainWindow):
     def __init__(self):
@@ -17,9 +17,10 @@ class Exercise(Ui_ExerciseWindow, QMainWindow):
         self._yourAnswer = ""  # 存放每次选择的答案
         self._yourAnswers = {}  # 记录选择的答案，用于回溯到做过的题目时恢复选项框状态
         self._currentQid = 0  # 记录当前题号，从0开始计数
-        self._singleChoice = SingleChoice(lessons["马原"] + questionType["单选"], n1)
-        self._multipleChoice = MultipleChoice(lessons["马原"] + questionType["多选"], n2)
-        self._judgmentQuestion = JudgmentQuestion(lessons["马原"] + questionType["判断"], n3)
+        self.init_num()
+        self._singleChoice = SingleChoice(lessons["马原"] + questionType["单选"], self.n1)
+        self._multipleChoice = MultipleChoice(lessons["马原"] + questionType["多选"], self.n2)
+        self._judgmentQuestion = JudgmentQuestion(lessons["马原"] + questionType["判断"], self.n3)
         self.n1 = self._singleChoice.get_num()
         self.n2 = self._multipleChoice.get_num()
         self.n3 = self._judgmentQuestion.get_num()
@@ -27,6 +28,11 @@ class Exercise(Ui_ExerciseWindow, QMainWindow):
         self.init_choose()
         self.init_your_answers()
         self.setFixedSize(self.width(), self.height())  # 固定窗口大小
+
+    def init_num(self):
+        self.n1 = n1
+        self.n2 = n2
+        self.n3 = n3
 
     def initUi(self):
         self.checkBox.setHidden(True)
