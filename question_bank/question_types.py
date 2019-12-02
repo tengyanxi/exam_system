@@ -8,7 +8,11 @@ class Question:
         global wrong_questions
         self._id = id_  # 该题型的id号
         self._num = num  # 该题型的数量
-        self._extract_questions = random.sample(get_data(id_), self._num)  # 抽取满足id号的所有num道题目
+        try:
+            self._extract_questions = random.sample(get_data(id_), self._num)  # 抽取满足id号的所有num道题目
+        except:
+            self._num = len(get_data(id_))
+            self._extract_questions = random.sample(get_data(id_), self._num)
         self._eachScore = 1  # 该题型每题的分数
         self._score = 0  # 该题型初始的得分为0分
         self._answers = {}  # 存放选取的答案的一个字典，每次点击上一题/下一题按钮时就更新
@@ -77,8 +81,8 @@ class Question:
             json_data = json.dumps(self._starData)
             f2.write(json_data)
 
-    def get_answers(self):  # 答案的对外接口
-        return self._answers
+    '''def get_answers(self):  # 答案的对外接口
+        return self._answers'''
 
     def get_num(self):  # 题目数量的对外接口
         return self._num
