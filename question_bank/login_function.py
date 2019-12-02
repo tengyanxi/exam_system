@@ -13,6 +13,7 @@ class Login(Ui_login_window, QMainWindow):
         self.initUi()
         self._name = ""
         self._pwd = ""
+        self.setFixedSize(self.width(), self.height())   # 固定窗口大小
 
     def initUi(self):
         self.loginButton.clicked.connect(self.login_button_click)
@@ -31,7 +32,8 @@ class Login(Ui_login_window, QMainWindow):
         if judge_in(self.lineEditName.text()) and judge_match(self.lineEditName.text(), self.lineEditPwd.text()):
             reply = QMessageBox.information(self, "登录成功", "登录成功", QMessageBox.Yes)
             if reply == QMessageBox.Yes:
-                mockTest.show()  # 登陆成功后跳转新界面
+                self.mockTest = MockTest()
+                self.mockTest.show()  # 登陆成功后跳转新界面
                 self.close()
         else:
             QMessageBox.warning(self, "登陆失败", "用户名或密码错误", QMessageBox.Yes)
@@ -39,7 +41,8 @@ class Login(Ui_login_window, QMainWindow):
             self.lineEditPwd.setFocus()
 
     def register_button_click(self):
-        registerWindow.show()
+        self.registerWindow = Register()
+        self.registerWindow.show()
         self.lineEditName.setText("")
         self.lineEditPwd.setText("")
         self.tipLabel.setText("")
@@ -49,6 +52,4 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     loginWindow = Login()
     loginWindow.show()
-    registerWindow = Register()
-    mockTest = MockTest()
     sys.exit(app.exec_())

@@ -1,6 +1,6 @@
 from register_window import Ui_register_window
 from data_operation import judge_in, write_data
-from PyQt5.QtCore import QRegExp
+from PyQt5.QtCore import QRegExp, Qt
 from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtWidgets import QMainWindow, QMessageBox
 
@@ -13,6 +13,8 @@ class Register(Ui_register_window, QMainWindow):
         self._pwd1 = ""
         self._pwd2 = ""
         self._name = ""
+        self.setFixedSize(self.width(), self.height())  # 固定窗口大小
+        self.setWindowModality(Qt.ApplicationModal)   # 设置打开注册窗口时不能操作登录窗口
 
     def initUi(self):
         self.confirmButton.clicked.connect(self.confirm_button_click)
@@ -47,7 +49,7 @@ class Register(Ui_register_window, QMainWindow):
         self._name = self.lineEditRegisterName.text()
         self._pwd1 = self.lineEditRegisterPwd1.text()
         self._pwd2 = self.lineEditRegisterPwd2.text()
-        if not judge_in(self._name) and self._pwd1 == self.pwd2:
+        if not judge_in(self._name) and self._pwd1 == self._pwd2 and self._name != '' and self._pwd1 != '':
             write_data(self._name, self._pwd1)
             QMessageBox.information(self, "注册成功", "注册成功！", QMessageBox.Yes)
             self.close()
