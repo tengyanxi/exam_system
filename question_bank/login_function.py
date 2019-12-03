@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from login_window import Ui_login_window
 from register_function import Register
 from data_operation import judge_in, judge_match
-from mock_test import MockTest
+from ability import select
 
 
 class Login(Ui_login_window, QMainWindow):
@@ -32,8 +32,8 @@ class Login(Ui_login_window, QMainWindow):
         if judge_in(self.lineEditName.text()) and judge_match(self.lineEditName.text(), self.lineEditPwd.text()):
             reply = QMessageBox.information(self, "登录成功", "登录成功", QMessageBox.Yes)
             if reply == QMessageBox.Yes:
-                self.mockTest = MockTest()
-                self.mockTest.show()  # 登陆成功后跳转新界面
+                self.select = select()
+                self.select.show()  # 登陆成功后跳转新界面
                 self.close()
         else:
             QMessageBox.warning(self, "登陆失败", "用户名或密码错误", QMessageBox.Yes)

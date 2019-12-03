@@ -1,14 +1,14 @@
+import json
 import sys
 from PyQt5.QtGui import QColor
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from exercise_window import Ui_ExerciseWindow
 from question_types import SingleChoice, MultipleChoice, JudgmentQuestion
 
 lessons = {"马原": "0","近代史": "1", "思修": "2"}
 questionType = {"单选": "1", "多选": '2', "判断": '0'}
-n1 = 20
-n2 = 10
-n3 = 20
+
 
 class Exercise(Ui_ExerciseWindow, QMainWindow):
     def __init__(self):
@@ -28,14 +28,18 @@ class Exercise(Ui_ExerciseWindow, QMainWindow):
         self.init_choose()
         self.init_your_answers()
         self.setFixedSize(self.width(), self.height())  # 固定窗口大小
+        self.setWindowModality(Qt.ApplicationModal)
 
     def init_q_n(self):
+        with open("exam_number.json", "r") as f2:
+            exam_number = json.load(f2)
+        self.n1 = exam_number["Single"]
+        self.n2 = exam_number["Multiple"]
+        self.n3 = exam_number["Judge"]
         self.q1 = lessons["马原"] + questionType["单选"]
         self.q2 = lessons["马原"] + questionType["多选"]
         self.q3 = lessons["马原"] + questionType["判断"]
-        self.n1 = n1
-        self.n2 = n2
-        self.n3 = n3
+
 
     def initUi(self):
         self.checkBox.setHidden(True)
@@ -48,6 +52,7 @@ class Exercise(Ui_ExerciseWindow, QMainWindow):
         txt = self._singleChoice.show_problem(0)  # 初始化第一道选择题的题目
         self.textEdit.setText(txt)
         self.push_button_is_enabled()  # 第一时不能按上一题的按钮
+        self.stared_or_not(self._singleChoice.if_stared(0))
         self.pushButton.clicked.connect(self.show1)
         self.pushButton_2.clicked.connect(self.show2)
         self.pushButton_3.clicked.connect(self.check_)

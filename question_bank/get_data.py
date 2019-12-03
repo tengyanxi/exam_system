@@ -18,4 +18,4 @@ def get_data(index):
 
 
 if __name__ == "__main__":
-    print(get_data('02')[0:6])
+    print(len(get_data('01')))

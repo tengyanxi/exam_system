@@ -5,7 +5,6 @@ import random
 
 class Question:
     def __init__(self, id_, num):
-        global wrong_questions
         self._id = id_  # 该题型的id号
         self._num = num  # 该题型的数量
         try:
@@ -19,7 +18,6 @@ class Question:
         self._question_id_list = {}  # 将字典的键存入一个列表中，避免多次在extract_questions中查找
         self.init_answers()
         self.init_star()
-        print(self._answers)
 
     def init_answers(self):  # 初始化存放答案的字典及存放键的列表，值都设为空
         for i in range(self._num):
@@ -82,9 +80,6 @@ class Question:
                 del self._starData[self._question_id_list[qid]]
             json_data = json.dumps(self._starData)
             f2.write(json_data)
-
-    '''def get_answers(self):  # 答案的对外接口
-        return self._answers'''
 
     def get_num(self):  # 题目数量的对外接口
         return self._num

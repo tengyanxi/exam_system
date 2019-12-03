@@ -1,18 +1,11 @@
 import json
 import sys
-from encodings import gbk
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QMessageBox, QApplication
 from exercise import Exercise
 
-with open("exam_number.json", "r") as f2:
-    exam_number = json.load(f2)
-
 lessons = {"马原": "0","近代史": "1", "思修": "2"}
 questionType = {"单选": "1", "多选": '2', "判断": '0'}
-n1 = exam_number["Single"]
-n2 = exam_number["Multiple"]
-n3 = exam_number["Judge"]
 
 
 class MockTest(Exercise):
@@ -22,12 +15,14 @@ class MockTest(Exercise):
         self.pushButton_3.setText("交卷")
 
     def init_q_n(self):   # 虚继承
+        with open("exam_number.json", "r") as f2:
+            exam_number = json.load(f2)
         self.q1 = lessons["马原"] + questionType["单选"]
         self.q2 = lessons["马原"] + questionType["多选"]
         self.q3 = lessons["马原"] + questionType["判断"]
-        self.n1 = n1
-        self.n2 = n2
-        self.n3 = n3
+        self.n1 = exam_number["Single"]
+        self.n2 = exam_number["Multiple"]
+        self.n3 = exam_number["Judge"]
 
     def init_time(self):  # 倒计时功能
         self.timer = QTimer()
