@@ -4,6 +4,7 @@ from PyQt5.QtGui import *
 from select_window import *
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
+import ChoiceType
 
 class select(Ui_MainWindow,QtWidgets.QMainWindow):
 
@@ -96,7 +97,10 @@ class select(Ui_MainWindow,QtWidgets.QMainWindow):
         
 
     def button_exercise_click(self):
-        pass
+        self.mainWindow = QMainWindow()
+        self.ui = ChoiceType.Ui_Dialog()
+        self.ui.setupUi(self.mainWindow)
+        self.mainWindow.show()
 
     def buttton_wrong_click(self):
         with open ("F:\\match\\my_code\\exam_system\\wrong_question.json") as f:

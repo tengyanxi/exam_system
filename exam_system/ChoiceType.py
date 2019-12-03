@@ -1,8 +1,6 @@
-import sys
+import json
 from PyQt5 import QtCore, QtGui, QtWidgets
 from distribute_questions import *
-from add_elem import choice_window
-from PyQt5.QtCore import QCoreApplication
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -24,7 +22,6 @@ class Ui_Dialog(object):
         self.horizontalLayout.addWidget(self.pushButton)
         self.pushButton.setEnabled(False)
         self.pushButton.clicked.connect(self.Continue)
-        #self.pushButton.clicked.connect(QCoreApplication.instance().quit)
 
         self.pushButton_2 = QtWidgets.QPushButton(self.horizontalLayoutWidget)
         font = QtGui.QFont()
@@ -168,7 +165,7 @@ class Ui_Dialog(object):
         self.Chap07.stateChanged.connect(lambda: self.chapState(self.Chap07))
 
         self.verticalLayoutWidget_3 = QtWidgets.QWidget(Dialog)
-        self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(400, 70, 101, 103))
+        self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(400, 70, 139, 131))
         self.verticalLayoutWidget_3.setObjectName("verticalLayoutWidget_3")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_3)
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
@@ -184,12 +181,21 @@ class Ui_Dialog(object):
         self.label_3.setObjectName("label_3")
         self.verticalLayout_4.addWidget(self.label_3)
 
-        self.Type_Judge = QtWidgets.QCheckBox(self.verticalLayoutWidget_3)
+        self.formLayout = QtWidgets.QFormLayout()
+        self.formLayout.setContentsMargins(-1, 0, -1, 0)
+        self.formLayout.setSpacing(6)
+        self.formLayout.setObjectName("formLayout")
+
+        '''self.Type_Judge = QtWidgets.QCheckBox(self.verticalLayoutWidget_3)
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
         self.Type_Judge.setFont(font)
+        self.Type_Judge.setEnabled(False)
+        self.Type_Judge.setCheckable(True)
+        self.Type_Judge.setChecked(True)
         self.Type_Judge.setObjectName("Type_Judge")
-        self.verticalLayout_4.addWidget(self.Type_Judge)
+        #self.verticalLayout_4.addWidget(self.Type_Judge)
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.Type_Judge)
         self.Type_Judge.stateChanged.connect(lambda: self.btnstate(self.Type_Judge))
         self.Type_Judge.stateChanged.connect(lambda: self.typeState(self.Type_Judge))
 
@@ -198,18 +204,62 @@ class Ui_Dialog(object):
         font.setFamily("微软雅黑")
         self.Type_Sgl.setFont(font)
         self.Type_Sgl.setObjectName("Type_Sgl")
-        self.verticalLayout_4.addWidget(self.Type_Sgl)
+        self.Type_Sgl.setEnabled(False)
+        self.Type_Sgl.setCheckable(True)
+        self.Type_Sgl.setChecked(True)
+        #self.verticalLayout_4.addWidget(self.Type_Sgl)
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.Type_Sgl)
         self.Type_Sgl.stateChanged.connect(lambda: self.btnstate(self.Type_Sgl))
         self.Type_Sgl.stateChanged.connect(lambda: self.typeState(self.Type_Sgl))
 
-        self.Type_Dbl = QtWidgets.QCheckBox(self.verticalLayoutWidget_3)
+        self.Type_Mul = QtWidgets.QCheckBox(self.verticalLayoutWidget_3)
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
-        self.Type_Dbl.setFont(font)
-        self.Type_Dbl.setObjectName("Type_Dbl")
-        self.verticalLayout_4.addWidget(self.Type_Dbl)
-        self.Type_Dbl.stateChanged.connect(lambda: self.btnstate(self.Type_Dbl))
-        self.Type_Dbl.stateChanged.connect(lambda: self.typeState(self.Type_Dbl))
+        self.Type_Mul.setFont(font)
+        self.Type_Mul.setObjectName("Type_Mul")
+        self.Type_Mul.setEnabled(False)
+        self.Type_Mul.setCheckable(True)
+        self.Type_Mul.setChecked(True)
+        #self.verticalLayout_4.addWidget(self.Type_Mul)
+        self.formLayout.setWidget(5, QtWidgets.QFormLayout.LabelRole, self.Type_Mul)
+        self.Type_Mul.stateChanged.connect(lambda: self.btnstate(self.Type_Mul))
+        self.Type_Mul.stateChanged.connect(lambda: self.typeState(self.Type_Mul))'''
+
+        self.comboBox_Judge = QtWidgets.QComboBox(self.verticalLayoutWidget_3)
+        self.comboBox_Judge.setObjectName("comboBox_Judge")
+        self.comboBox_Judge.currentIndexChanged.connect(self.selectionChange)
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.comboBox_Judge)
+
+        self.comboBox_Sgl = QtWidgets.QComboBox(self.verticalLayoutWidget_3)
+        self.comboBox_Sgl.setObjectName("comboBox_Sgl")
+        self.comboBox_Sgl.currentIndexChanged.connect(self.selectionChange)
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.comboBox_Sgl)
+
+        self.comboBox_Mul = QtWidgets.QComboBox(self.verticalLayoutWidget_3)
+        self.comboBox_Mul.setObjectName("comboBox_Mul")
+        self.comboBox_Mul.currentIndexChanged.connect(self.selectionChange)
+        self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.comboBox_Mul)
+
+        self.verticalLayout_4.addLayout(self.formLayout)
+
+        self.label_5 = QtWidgets.QLabel(self.verticalLayoutWidget_3)
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        self.label_5.setFont(font)
+        self.label_5.setObjectName("label_5")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.label_5)
+        self.label_6 = QtWidgets.QLabel(self.verticalLayoutWidget_3)
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        self.label_6.setFont(font)
+        self.label_6.setObjectName("label_6")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.label_6)
+        self.label_7 = QtWidgets.QLabel(self.verticalLayoutWidget_3)
+        font = QtGui.QFont()
+        font.setFamily("微软雅黑")
+        self.label_7.setFont(font)
+        self.label_7.setObjectName("label_7")
+        self.formLayout.setWidget(5, QtWidgets.QFormLayout.LabelRole, self.label_7)
 
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(260, 20, 81, 31))
@@ -221,6 +271,11 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+        for n in range(1, 101):
+            self.comboBox_Judge.addItem("{}".format(n))
+            self.comboBox_Sgl.addItem("{}".format(n))
+            self.comboBox_Mul.addItem("{}".format(n))
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -241,13 +296,33 @@ class Ui_Dialog(object):
         self.Chap06.setText(_translate("Dialog", "第六章"))
         self.Chap07.setText(_translate("Dialog", "第七章"))
         self.label_3.setText(_translate("Dialog", "题型选择"))
-        self.Type_Judge.setText(_translate("Dialog", "判断题"))
-        self.Type_Sgl.setText(_translate("Dialog", "单选题"))
-        self.Type_Dbl.setText(_translate("Dialog", "多选题"))
-        self.label.setText(_translate("Dialog", "进入题库"))
+        self.label_5.setText(_translate("Dialog", "判断题"))
+        self.label_6.setText(_translate("Dialog", "单选题"))
+        self.label_7.setText(_translate("Dialog", "多选题"))
+        self.label.setText(_translate("Dialog", "专项选择"))
+
+    def selectionChange(self):
+        global d_Judge_num, d_Sgl_num, d_Mul_num
+        d_Judge_num = self.comboBox_Judge.currentIndex()
+        d_Sgl_num = self.comboBox_Sgl.currentIndex()
+        d_Mul_num = self.comboBox_Mul.currentIndex()
 
     def Continue(self):
-        choice.show()
+        d_type = "012"
+        print(distribute_question(d_sub, d_chap, d_type))
+        with open('exam_number.json', 'w', encoding='utf-8') as f1:
+            dic = {"Judge": d_Judge_num + 1, "Single": d_Sgl_num + 1, "Multiple": d_Mul_num + 1}
+            json.dump(dic, f1, ensure_ascii=False, indent=4)
+        with open('exam_bank.json', 'w', encoding='utf-8') as f2:
+            seq = []
+            dic1 = {}
+            dic2 = {}
+            for question in distribute_question(d_sub, d_chap, d_type):
+                seq.append(question[-1])
+                dic1.update(dic2.fromkeys(seq, question[0:-1]))
+                seq = []
+                dic2 = {}
+            json.dump(dic1, f2, ensure_ascii=False, indent=4)
 
     def Exit(self):
         exit()
@@ -277,7 +352,7 @@ class Ui_Dialog(object):
         d_chap = ''.join(list(d_chap))
 
 
-    def typeState(self, btn):
+    '''def typeState(self, btn):
         global d_type
         d_type = set()
 
@@ -289,12 +364,12 @@ class Ui_Dialog(object):
             d_type.add("1")
         else:
             d_type.discard("1")
-        if self.Type_Dbl.isChecked() == True:
+        if self.Type_Mul.isChecked() == True:
             d_type.add("2")
         else:
             d_type.discard("2")
 
-        d_type = ''.join(list(d_type))
+        d_type = ''.join(list(d_type))'''
 
     def btnstate(self, btn):
         judge1 = self.Marx.isChecked() or self.History.isChecked() or self.Moral.isChecked()
@@ -306,24 +381,15 @@ class Ui_Dialog(object):
                 judge2 = True
         if judge1:
             if judge2:
-                if (self.Type_Judge.isChecked() == 1) or (self.Type_Sgl.isChecked() == 1) or (self.Type_Dbl.isChecked() == 1):
-                    self.pushButton.setEnabled(True)
-                else:
-                    self.pushButton.setEnabled(False)
+                self.pushButton.setEnabled(True)
             else:
                 self.pushButton.setEnabled(False)
-
-if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
-    choice = choice_window()
-    sys.exit(app.exec_)
-
 
 '''
     def btnstate(self, btn):
         if (self.Marx.isChecked() == True) or (self.History.isChecked() == True) or (self.Moral.isChecked() == True):
             if (self.Chap00.isChecked() == 0) or (self.Chap01.isChecked() == 0) or (self.Chap02.isChecked() == 0) or (self.Chap03.isChecked() == 0) or (self.Chap04.isChecked() == 0) or (self.Chap05.isChecked() == 0) or (self.Chap06.isChecked() == 0) or (self.Chap07.isChecked() == 0):
-                if (self.Type_Judge.isChecked() == 0) or (self.Type_Sgl.isChecked() == 0) or (self.Type_Dbl.isChecked() == 0):
+                if (self.Type_Judge.isChecked() == 0) or (self.Type_Sgl.isChecked() == 0) or (self.Type_Mul.isChecked() == 0):
                     self.pushButton.setEnabled(True)
 '''
 
