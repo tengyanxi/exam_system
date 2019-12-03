@@ -20,7 +20,6 @@ class select(Ui_MainWindow,QtWidgets.QMainWindow):
         for key in data.keys():
             if key[0] == "0":
                 question[key] = data[key]
-        print(question)
         with open("F:\\match\\my_code\\exam_system\\questions.json", "w") as f:
             json.dump(question, f)
 
@@ -92,8 +91,12 @@ class select(Ui_MainWindow,QtWidgets.QMainWindow):
         for i in range(decide_num):
             q = random.choices(decide_question)
             questions[q[0]] = data[q[0]]
+        questions["Judge"] = 20
+        questions["Single"] = 20
+        questions["Multiple"] = 10
         with open ("F:\\match\\my_code\\exam_system\\exam_bank.json", "w") as f:
             json.dump(questions, f)
+        print(questions)
         
 
     def button_exercise_click(self):

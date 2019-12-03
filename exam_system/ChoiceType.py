@@ -309,7 +309,6 @@ class Ui_Dialog(object):
 
     def Continue(self):
         d_type = "012"
-        print(distribute_question(d_sub, d_chap, d_type))
         with open('exam_number.json', 'w', encoding='utf-8') as f1:
             dic = {"Judge": d_Judge_num + 1, "Single": d_Sgl_num + 1, "Multiple": d_Mul_num + 1}
             json.dump(dic, f1, ensure_ascii=False, indent=4)

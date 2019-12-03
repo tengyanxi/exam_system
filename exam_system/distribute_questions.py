@@ -2,7 +2,7 @@ import json
 from ChoiceType import *
 
 def get_data(index):
-    with open('data.json', 'r', encoding='utf-8') as f:
+    with open('F:\\match\\my_code\\exam_system\\data.json', 'r', encoding='utf-8') as f:
         file_data = json.load(f)
         data_list = []
         num = len(index)
